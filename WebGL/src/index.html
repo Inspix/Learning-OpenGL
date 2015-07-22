@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body onload="setup()">
+    <canvas id="webgl" width="500" height="500"></canvas>
+</body>
+    <script type="text/javascript">
+        var gl = null;
+
+        function setup(){
+            var vshader = 'attribute vec2 position;' +
+                          'void main() {' +
+                          '    gl_Position = vec4(position, 0, 1); }';
+            var fshader = 'precision mediump float;'+
+                          'void main() {' +
+                          '    gl_FragColor = vec4(1,0, 0, 1); }';
+
+            var c = document.getElementById('webgl');
+            gl = initWebGL(c);
+
+            var verticies = [-1, -1, 1, -1, 0, 1];
+            var vbo = gl.createBuffer();
+
+            gl.bindBuffer(gl.ARRAY_BUFFER,vbo);
+            gl.bufferData(gl.ARRAY_BUFFER,new Float32Array(verticies),gl.STATIC_DRAW);
+
+            var program = createProgram(vshader,fshader);
+
+            gl.clearColor(0,0,0,1);
+            gl.clear(gl.COLOR_BUFFER_BIT);
+
+            gl.useProgram(program);
+            program.vtxPosAtr = gl.getAttribLocation(program, 'position');
+            gl.enableVertexAttribArray(program.vtxPosAtr);
+            gl.vertexAttribPointer(program.vtxPosAtr, 2, gl.FLOAT, false, 0, 0);
+            gl.drawArrays(gl.TRIANGLES, 0, 3);
+
+        }
+
+        function createShader(str, type) {
+            var shader = gl.createShader(type);
+            gl.shaderSource(shader, str);
+            gl.compileShader(shader);
+
+            return shader;
+        }
+
+        function createProgram(vstr, fstr) {
+            var program = gl.createProgram();
+            var vshader = createShader(vstr, gl.VERTEX_SHADER);
+            var fshader = createShader(fstr, gl.FRAGMENT_SHADER);
+            gl.attachShader(program, vshader);
+            gl.attachShader(program, fshader);
+            gl.linkProgram(program);
+
+            return program;
+        }
+
+        function initWebGL(canvas){
+
+            try{
+                var context = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
+            }catch(e){alert(e)}
+
+
+            if(!context){
+                alert('Failed to init webgl');
+                context=null;
+            }
+            return context;
+        }
+    </script>
+</html>
