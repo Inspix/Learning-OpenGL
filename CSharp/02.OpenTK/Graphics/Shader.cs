@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using OpenTK.Graphics;
 using OpenTK.Graphics.OpenGL;
-using OpenTK.Utils;
 using System.IO;
+using OpenTKShaders.Utils;
 
-namespace _02.OpenTK.Graphics
+namespace OpenTKShaders.Graphics
 {
 
-    public class Shader
+    public class Shader : IDisposable
     {
         private readonly string path;
         private readonly ShaderType type;
@@ -52,6 +52,11 @@ namespace _02.OpenTK.Graphics
                 GL.DeleteShader(this.ID);
                 this.ID = -1;
             }
+        }
+
+        public void Dispose()
+        {
+            GL.DeleteShader(this.ID);
         }
 
     }

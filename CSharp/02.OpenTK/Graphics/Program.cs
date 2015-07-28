@@ -1,23 +1,27 @@
-using _02.OpenTK.Graphics;
-using OpenTK.Graphics.OpenGL;
 using System;
+using System.Collections.Generic;
+using OpenTK.Graphics.OpenGL;
 
-namespace OpenTK.Graphics
+namespace OpenTKShaders.Graphics
 {
-    public class Program
+    public class ShaderProgram : IDisposable
     {
         private Shader vShader;
         private Shader fShader;
-        
+
+        private Dictionary<string, int> uniformLocations;
+        private Dictionary<string, int> attribLocations;
+
         public int ID { get; private set; }
 
-        public Program(string path,bool keepshaders = false)
+        public ShaderProgram(string path,bool keepshaders = false) : this(path,path,keepshaders)
         {
-            this.CreateProgram(path, path,keepshaders);
         }
 
-        public Program(string vspath,string fspath, bool keepshaders = false)
+        public ShaderProgram(string vspath,string fspath, bool keepshaders = false)
         {
+            this.uniformLocations = new Dictionary<string, int>();
+            this.attribLocations = new Dictionary<string, int>();
             this.CreateProgram(vspath,fspath,keepshaders);
         }
 
@@ -37,7 +41,7 @@ namespace OpenTK.Graphics
             if (programStatus == (int)All.False)
             {
                 string status = GL.GetProgramInfoLog(this.ID);
-                Console.WriteLine("The program failed to compile.\n" + status);
+                Console.WriteLine("The program failed to link.\n" + status);
                 GL.DeleteProgram(this.ID);
                 GL.DeleteShader(vShader.ID);
                 GL.DeleteShader(fShader.ID);
@@ -53,6 +57,38 @@ namespace OpenTK.Graphics
             Console.WriteLine("Program succesfully linked.");
         }
 
+        public int GetUniformLocation(string name)
+        {
+            if (uniformLocations.ContainsKey(name))
+            {
+                return uniformLocations[name];
+            }
+            int loc = GL.GetUniformLocation(this.ID, name);
+            if (loc == -1)
+            {
+                Console.WriteLine("Error getting the uniform location of '{0}', errorCode: '{1}'",name,loc);
+                return -1;
+            }
+            uniformLocations[name] = loc;
+            return loc;
+        }
+
+        public int GetAttribLocation(string name)
+        {
+            if (attribLocations.ContainsKey(name))
+            {
+                return attribLocations[name];
+            }
+            int loc = GL.GetAttribLocation(this.ID, name);
+            if (loc == (int)All.InvalidValue || loc == (int)All.InvalidValue)
+            {
+                Console.WriteLine("Error getting the attribute location of '{0}', errorCode: '{1}'", name, loc);
+                return -1;
+            }
+            attribLocations[name] = loc;
+            return loc;
+        }
+
         public void Enable()
         {
             GL.UseProgram(this.ID);
@@ -61,6 +97,11 @@ namespace OpenTK.Graphics
         public void Disable()
         {
             GL.UseProgram(0);
+        }
+
+        public void Dispose()
+        {
+            GL.DeleteProgram(this.ID);
         }
     }
 }
