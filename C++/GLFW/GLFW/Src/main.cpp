@@ -1,9 +1,10 @@
 #include <iostream>
+#include <GL/glew.h>
 #include <GLFW/glfw3.h>
-#include <GLEW/glew.h>
+#include <shader.h>
 
+using namespace OpenGL::Graphics;
 int main(int argc, char** argv) {
-	
 	GLFWwindow* window;
 	if (!glfwInit()) {
 		std::cout << "Failed to init GLFW!" << std::endl;
@@ -18,6 +19,9 @@ int main(int argc, char** argv) {
 	}
 
 	glfwMakeContextCurrent(window);
+	glewInit();
+
+	Shader vert = Shader(GL_VERTEX_SHADER, "data/shaders/basic.vert");
 
 	while (!glfwWindowShouldClose(window))
 	{
@@ -29,4 +33,5 @@ int main(int argc, char** argv) {
 	glfwTerminate();
 	std::cin.ignore();
 	return 0;
+
 }
