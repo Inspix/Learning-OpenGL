@@ -4,15 +4,15 @@
 
 namespace OpenGL {
 	namespace Graphics {
-		ShaderProgram::ShaderProgram(Shader vert, Shader frag)
+		ShaderProgram::ShaderProgram(Shader &vert, Shader &frag)
 			: m_VertShader(vert), m_FragShader(frag)
 		{
 			CreateProgram();
 		}
 		
 		ShaderProgram::~ShaderProgram() {
-			delete &m_FragShader;
-			delete &m_VertShader;
+			m_FragShader.~Shader();
+			m_VertShader.~Shader();
 			glDeleteProgram(m_ProgramID);
 		}
 
@@ -44,8 +44,6 @@ namespace OpenGL {
 					std::cout << i;
 				}
 				std::cout << std::endl;
-				delete &m_VertShader;
-				delete &m_FragShader;
 				glDeleteProgram(m_ProgramID);
 			}
 		}

@@ -35,7 +35,6 @@ int main(int argc, char** argv) {
 	GLint scale = glGetUniformLocation(program.ID(), "scale");
 	glUniform1f(scale, 2.0f);
 
-
 	while (!glfwWindowShouldClose(window))
 	{
 		glClearColor(0.0f, 0.0f, 0.0f, 1.0f);

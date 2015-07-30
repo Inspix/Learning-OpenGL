@@ -35,7 +35,6 @@ namespace OpenGL {
 				{
 					std::cout << i;
 				}
-				std::cout << std::endl;
 				glDeleteShader(m_shaderID);
 			}
 		}

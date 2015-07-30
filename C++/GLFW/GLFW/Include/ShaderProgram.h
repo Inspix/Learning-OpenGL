@@ -6,7 +6,7 @@ namespace OpenGL {
 	namespace Graphics {
 		class ShaderProgram {
 		public:
-			ShaderProgram(Shader vert, Shader frag);
+			ShaderProgram(Shader &vert, Shader &frag);
 			virtual ~ShaderProgram();
 
 
