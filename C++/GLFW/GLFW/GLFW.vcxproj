@@ -143,9 +143,11 @@
   <ItemGroup>
     <ClCompile Include="Src\main.cpp" />
     <ClCompile Include="Src\shader.cpp" />
+    <ClCompile Include="Src\ShaderProgram.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Include\shader.h" />
+    <ClInclude Include="Include\ShaderProgram.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\shaders\basic.vert">

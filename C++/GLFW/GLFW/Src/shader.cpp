@@ -2,14 +2,18 @@
 #include <fstream>
 #include <iostream>
 #include <stdexcept>
+#include <vector>
+
 namespace OpenGL {
 	namespace Graphics {
 
 		Shader::Shader(GLenum type, const std::string &filename) {
-			this->CreateShader(type, filename);
+			CreateShader(type, filename);
 		}
 
-		Shader::~Shader() {}
+		Shader::~Shader() {
+			glDeleteShader(m_shaderID);
+		}
 
 		void Shader::CreateShader(GLenum type, const std::string &filename) {
 			m_shaderID = glCreateShader(type);
@@ -18,8 +22,22 @@ namespace OpenGL {
 			glShaderSource(m_shaderID, 1, &source, nullptr);
 			glCompileShader(m_shaderID);
 
-			// TODO: Check for compilation errors and save it to m_errorLog;
-			std::cout << sourceString << std::endl;
+			GLint status = 0;
+			glGetShaderiv(m_shaderID, GL_COMPILE_STATUS, &status);
+			if (status == GL_FALSE)
+			{
+				GLint lenght = 0;
+				glGetShaderiv(m_shaderID, GL_INFO_LOG_LENGTH, &lenght);
+				std::vector<GLchar> errorlog(lenght);
+				glGetShaderInfoLog(m_shaderID, lenght, &lenght, &errorlog[0]);
+
+				for (GLchar const &i : errorlog)
+				{
+					std::cout << i;
+				}
+				std::cout << std::endl;
+				glDeleteShader(m_shaderID);
+			}
 		}
 
 		std::string Shader::ShaderSourseFromFile(const std::string &filename) {
