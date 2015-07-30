@@ -16,6 +16,13 @@ namespace OpenGL {
 			glDeleteProgram(m_ProgramID);
 		}
 
+		void ShaderProgram::Enable() const {
+			glUseProgram(m_ProgramID);
+		}
+		void ShaderProgram::Disable() const {
+			glUseProgram(0);
+		}
+
 		void ShaderProgram::CreateProgram() {
 			m_ProgramID = glCreateProgram();
 			
