@@ -85,7 +85,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -98,7 +98,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -113,7 +113,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -130,7 +130,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Include;</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)GLFW/Dependencies/include;$(SolutionDir)GLFW/Src</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -142,12 +142,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Src\main.cpp" />
-    <ClCompile Include="Src\shader.cpp" />
-    <ClCompile Include="Src\ShaderProgram.cpp" />
+    <ClCompile Include="Src\Graphics\shader.cpp" />
+    <ClCompile Include="Src\Graphics\ShaderProgram.cpp" />
+    <ClCompile Include="Src\Maths\Vec2.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\shader.h" />
-    <ClInclude Include="Include\ShaderProgram.h" />
+    <ClInclude Include="Src\Graphics\shader.h" />
+    <ClInclude Include="Src\Graphics\ShaderProgram.h" />
+    <ClInclude Include="Src\Maths\Vec2.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="data\shaders\basic.frag" />

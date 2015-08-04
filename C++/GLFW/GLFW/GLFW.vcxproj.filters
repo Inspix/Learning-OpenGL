@@ -18,18 +18,24 @@
     <ClCompile Include="Src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\shader.cpp">
+    <ClCompile Include="Src\Graphics\shader.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Src\ShaderProgram.cpp">
+    <ClCompile Include="Src\Graphics\ShaderProgram.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Src\Maths\Vec2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Include\ShaderProgram.h">
+    <ClInclude Include="Src\Graphics\ShaderProgram.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Include\shader.h">
+    <ClInclude Include="Src\Graphics\shader.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Src\Maths\Vec2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
