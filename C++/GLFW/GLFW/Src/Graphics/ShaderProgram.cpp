@@ -1,6 +1,4 @@
 #include <Graphics/ShaderProgram.h>
-#include <iostream>
-#include <vector>
 
 namespace OpenGL {
 	namespace Graphics {

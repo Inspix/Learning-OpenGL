@@ -1,6 +1,10 @@
 #pragma once
 
 #include <string>
+#include <fstream>
+#include <iostream>
+#include <stdexcept>
+#include <vector>
 #include <GL/glew.h>
 
 namespace OpenGL {

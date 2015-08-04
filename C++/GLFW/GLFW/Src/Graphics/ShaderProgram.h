@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Graphics/Shader.h>
+#include <iostream>
+#include <vector>
 
 namespace OpenGL {
 	namespace Graphics {
